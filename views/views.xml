@@ -3,8 +3,8 @@
         <!-- todas la vitas se definen con la etiqueta record -->
 
         <record model="ir.ui.view" id="view_custom_crm_visit_form">
-            <field name="name">view.custom.crm.visit.form</field>
-            <field name="model">custom_crm.visit</field>
+            <field name="name">view.custom.crm.visit.form</field> <!-- se pone el mismo nombre del id, separado por puntos -->
+            <field name="model">custom_crm.visit</field><!-- se pone el nombre del modelo creado dentro del archivo py models -->
             <field name="arch" type="xml">
                 <form string="Visita">
                     <sheet> <!-- representa_todo el cuadro en donde va a quedar almacenada la info de lo que ponemos en la filas y columnas -->
