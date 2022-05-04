@@ -45,7 +45,7 @@
          <!-- este es el "controlador" , lo que decia del atributo actions que aqui hace las veces de controlador a traves de la etiqueta actios
         para poder gestionar las vistas. Entonces esta parte lo que nos ayudara será a enlazar las vistas con las etiquetas de menu-->
         <record id="action_custom_crm_visit_view" model="ir.actions.act_window">
-            <field name="name">action.custom.crm.visit.view</field>
+            <field name="name">Visita</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">custom_crm.visit</field>
             <field name="view_mode">tree,form</field><!-- el modo de la vista será una vista tree y una vista formulario, que son las que creamos previamente, antes pues de haber echo la parte del menu de vistas y de darle la funcionalidad a la eqiqueta actions-->
