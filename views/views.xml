@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    <record>
         <!-- todas la vitas se definen con la etiqueta record -->
 
         <record model="ir.ui.view" id="view_custom_crm_visit_form">
@@ -10,15 +10,15 @@
                     <sheet> <!-- representa_todo el cuadro en donde va a quedar almacenada la info de lo que ponemos en la filas y columnas -->
                         <group name="group_top">
 
-                            <group name="group_left"> <!-- grupo de la columna de la izquierda -->
-                                <field name="customers"/>
-                                <field name="date"/>
-                                <field name="type"/>
+                            <group name="group_left"> <!-- grupo de la columna de la izquierda. Aqui vamos a agregar los atributos de la parte izquierda -->
+                                <field name="customers"/><!--Aqui se representa el valor del cliente-->
+                                <field name="date"/><!--Aqui se representa el valor del cliente-->
+                                <field name="type"/><!--Aqui se representa el valor del cliente-->
                             </group>
 
-                            <group name="group_rigth"> <!-- grupo de la columna de la derecha -->
-                                <field name="name"/>
-                                <field name="done"/>
+                            <group name="group_rigth"> <!-- grupo de la columna de la derecha.Aqui vamos a agregar los atributos de la parte derecha -->
+                                <field name="name"/> <!--la descripcion-->
+                                <field name="done"/>  <!--esta realizada-->
                             </group>
 
                         </group>
@@ -27,15 +27,58 @@
             </field>
         </record>
 
-        <record id="view_custom_crm_visit" model="ir.ui.view">
-            <field name=""></field>
-            <field name=""></field>
+        <!--con esto ya tenemos como identificar el registro-->
+        <record id="view_custom_crm_visit_tree" model="ir.ui.view"> <!--vista tipo arbol-->
+            <field name="">view.custom.crm.visit.tree</field>
+            <field name="">custom.crm.visit</field><!--defincion del modelo-->
             <field name="arch" type="xml">
-
-
+                <tree string="Visit">
+                    <!--Aqui le especificamos las columnas que queremos que nos muestre-->
+                    <field name="customer"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="date"/>
+                </tree>
             </field>
         </record>
 
+        <!-- este es el "controlador" , lo que decia del atributo actions que aqui hace las veces de controlador a traves de la etiqueta actios
+        para poder gestionar las vistas. Entonces esta parte lo que nos ayudara será a enlazar las vistas con las etiquetas de menu-->
+        <record id="action_custom_crm_visit_view" model="ir.actions.act.windows">
+            <field name="name">action.custom.crm.visit.view</field>
+            <field name="type">ir.actions.act_windows</field>
+            <field name="res_model">custom_crm.visit</field>
+            <field name="view_mode">tree,form</field><!-- el modo de la vista será una vista tree y una vista formulario, que son las que creamos previamente, antes pues de haber echo la parte del menu de vistas y de darle la funcionalidad a la eqiqueta actions-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Visitas
+                </p>
+                <p>
+                    Click "Nuevo" para añadir nuevos elementos
+                </p>
+            </field>
+        </record>
+
+
+
+
+        <!-- cuando queremos acceder a una vista en concreto tenemos que utilizar un menu
+            Aqui haremos un menu.
+            En odoo los menus se estructuran en 3 niveles.-->
+
+        <!--primer nivel-->
+        <menuitem id="menu_custom_crm_root" name="Custom_CRM" sequence="10" /> <!-- -->
+
+        <!-- segundo nivel-->
+        <menuitem id="menu_custom_crm_visit_categ" name="Operaciones" parent="menu_custom_crm_root" sequence="0"/> <!-- el parent es para decirle a que item será asociado -->
+
+        <!--tercer nivel-->
+        <!--el atributo actions es el mas importante ya que es quien me permitira acceder desde el menu a cualquiera de las vistas
+        Hace las veces de controlador; ya que quien envia o hace peticiones a el modelo.
+        Ya que quien gestiona la labor entre las vistas es el controlador, quien consulta o le pide datos, o le envia datos al modelo es el controlador.
+        La idea es que al darle click en un elemento de menu, este nos redirija a una vista en concreto.
+        La acciones tambien se define tambien por un grupo record-->
+        <menuitem id="menu_custom_crm_visit" name="Visitas" parent="menu_custom_crm_visit_categ" sequence="0" actions=""/>
 
     </data>
 </odoo>
