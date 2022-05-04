@@ -13,7 +13,7 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
      _description = 'Visit' #descripcion, cualquier descripcion que describa el modelo
 
      name = fields.Char(string='Descripcion') #lo que va dentro de los parentesis es como va a quedar definido en la vista del crm, como atributo le pasamos un string para que nos etiquete este campo
-     customers = fields.Char(string='Cliente')
+     customer = fields.Char(string='Cliente')
      date = fields.Datetime(string='Fecha')
      type = fields.Selection([('P', 'Presencial'), ('W', 'Whatsapp'), ('T', 'Telefonico')], string='Tipo', required=True) #required es un tipo de dato requerido, que siempre se debe especificar. Tambien se hace un arreglo de tuplas.
      done = fields.Boolean(string='Realizada', readonly=True) #readnoly significa que ese valor de realizada, no se va a poder modificar desde la vista presentada pues en el navegador
