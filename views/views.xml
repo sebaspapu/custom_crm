@@ -2,6 +2,7 @@
     <data>
         <!-- todas la vitas se definen con la etiqueta record -->
 
+        <!--vista tipo formulario-->
         <record model="ir.ui.view" id="view_custom_crm_visit_form">
             <field name="name">view.custom.crm.visit.form</field> <!-- se pone el mismo nombre del id, separado por puntos -->
             <field name="model">custom_crm.visit</field><!-- se pone el nombre del modelo creado dentro del archivo py models -->
@@ -19,6 +20,7 @@
                             <group name="group_rigth"> <!-- grupo de la columna de la derecha.Aqui vamos a agregar los atributos de la parte derecha -->
                                 <field name="name"/> <!--la descripcion-->
                                 <field name="done"/>  <!--esta realizada-->
+                                <field name="image" widget="image"/> <!--Aqui va la imagen, este es el campo para esa imagen. En resumen nos carga la imagen y nos lo pinta en la vista-->
                             </group>
 
                         </group>
@@ -27,6 +29,7 @@
             </field>
         </record>
 
+        <!--vista tipo arbol-->
         <!--con esto ya tenemos como identificar el registro-->
         <record id="view_custom_crm_visit_tree" model="ir.ui.view"> <!--vista tipo arbol-->
             <field name="name">view.custom.crm.visit.tree</field>
@@ -42,13 +45,63 @@
             </field>
         </record>
 
+        <!--vista tipo kanban-->
+        <record id="view_custom_crm_visit_kanban" model="ir.ui.view"><!--El id es; view, el nombre del modulo, el nombre del modelo, el tipo de vista  -->
+            <field name="name">view.custom.crm.visit.kanban</field><!-- ponemos el mismo nombre dado en el id, pero en este caso separamos por puntos-->
+            <field name="model">custom_crm.visit</field>
+            <field name="arch" type="xml">  <!-- todas las vistas se definen en xml, casi siempre se sigue la misma estructura para definir las vistas o los modelos, esto es un estandar. NOTA: una vez domine esto no tendre ningun problema.-->
+                <!--Apartir de aqui empezaré a definir lo que aparecerá en cada una de las tarjetas-->
+                <kanban class="o_custom_crm_visit_kanban"> <!--le damos un nombre a la clase de la etiqueta kanban-->
+                    <!--Aqui le especificaremos todos los datos que queremos que nos aparezcan en la vista kanban-->
+                    <field name="id"/>
+                    <field name="name"/><!--nombre-->
+                    <field name="customer"/><!--cliente-->
+                    <field name="date"/><!--fecha-->
+                    <field name="type"/><!--tipo-->
+                    <!--aqui lo que hicimos fue precargar un poco los datos antes de cargarlos en la plantilla-->
+
+                    <!--A continuacion las plantillas:
+                    Aqui en las plantillas podemos tener definidas varias plantillas-->
+                    <templates>
+                        <!--Primero se define una plantilla padre.
+                        Y dentro de esta es que haremos la definicion de los campos y como se estructuran-->
+                        <t t-name="kanban-box">
+                            <!--Los campos se estructuran a traves de clases ttf.-->
+                            <!--La clase en donde va la imagen, y que ocupa aproximadamente el 30% de la tarjeta a su izquierda la definimos aqui:-->
+                            <div t-attf-class="oe_kanban_global_click"> <!-- la etiqueta div se utiliza para dividir y definir un bloque de contenido oseccion de una pagina-->
+                                <div class="o_kanban_image">
+                                    <img alt="Avatar"
+                                         t-att-src="kanban_image('', '', record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_tittle">
+                                        <field name="name"/>
+                                    </strong>
+                                    <div t-if="record..value">
+                                        <t t-esc="record..value"/>
+                                    </div>
+                                    <div t-if="record..value">
+                                        <t t-esc="record..value"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
          <!-- este es el "controlador" , lo que decia del atributo actions que aqui hace las veces de controlador a traves de la etiqueta actios
         para poder gestionar las vistas. Entonces esta parte lo que nos ayudara será a enlazar las vistas con las etiquetas de menu-->
         <record id="action_custom_crm_visit_view" model="ir.actions.act_window">
             <field name="name">Visita</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">custom_crm.visit</field>
-            <field name="view_mode">tree,form</field><!-- el modo de la vista será una vista tree y una vista formulario, que son las que creamos previamente, antes pues de haber echo la parte del menu de vistas y de darle la funcionalidad a la eqiqueta actions-->
+            <field name="view_mode">tree,form, kanban</field><!-- el modo de la vista será una vista tree y una vista formulario,
+            que son las que creamos previamente, antes pues de haber echo la parte del menu de vistas y de darle la funcionalidad
+            a la eqiqueta actions. Tambien agregamos Kamban porque vamos a manejarla tambien-->
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     Visitas

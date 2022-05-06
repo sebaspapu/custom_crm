@@ -14,7 +14,7 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
 
      name = fields.Char(string='Descripcion') #lo que va dentro de los parentesis es como va a quedar definido en la vista del crm, como atributo le pasamos un string para que nos etiquete este campo
 
-     #De esta manera relacioné un cliente con la visita:
+     #De esta manera relacioné un cliente con la visita: (Tema relaciones)
      customer = fields.Many2one(string='Cliente', comodel_name = 'res.partner') #El cliente en este caso lo vamos a asociar con N visitas. Será una relacion ManytoOne
      #Lo que hacemos con el Many2One es pintar a los clientes, dandome la lista para escoger el cliente.
      #el comodel_name es la tabla de la base de datos, quien tiene los registros de los clientes, el modelo de donde saldran los datos.
@@ -24,3 +24,8 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
 
 #     @api.depends('value')
 #     def _value_pc(self):
+
+
+#Imagen asociad a vista kamban
+     image = fields.Binary(String='Imagen')
+
