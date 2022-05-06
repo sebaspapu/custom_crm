@@ -20,7 +20,7 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
      #el comodel_name es la tabla de la base de datos, quien tiene los registros de los clientes, el modelo de donde saldran los datos.
      date = fields.Datetime(string='Fecha')
      type = fields.Selection([('P', 'Presencial'), ('W', 'Whatsapp'), ('T', 'Telefonico')], string='Tipo', required=True) #required es un tipo de dato requerido, que siempre se debe especificar. Tambien se hace un arreglo de tuplas.
-     done = fields.Boolean(string='Realizada', readonly=True) #readnoly significa que ese valor de realizada, no se va a poder modificar desde la vista presentada pues en el navegador
+     done = fields.Boolean(string='Realizada') #readnoly significa que ese valor de realizada, no se va a poder modificar desde la vista presentada pues en el navegador
 
 #     @api.depends('value')
 #     def _value_pc(self):

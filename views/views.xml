@@ -106,16 +106,31 @@
                 <!--Podremos indicar que campos queremos que se puedan filtrar. Po ejemplo queremos que se filtre por el nombre de la visita y la fecha.
                 Tambien podemos generar filtros predefinidos, y podemos generar agrupaciones predefinidas que le aparezcan al usuario una vez acceda a la vista sin que el tenga que definirlos.-->
 
-                <!-- lo primero que haremos será darle un nombre, y aqui le especificaremos por que campos queremos que se filtre -->
+                <!-- lo primero que haremos será darle un nombre, y aqui le especificaremos por que campos queremos que se filtre.
+                Estos son los campos que quiero que muestre una vez se haga el filtro por grupos.-->
                 <search string="Filtrar visitas">
-                    <field name="name"/>
-                    <field name="customer"/>
+                    <field name="name"/> <!-- Descripcion-->
+                    <field name="customer"/> <!-- cliente-->
+                    <field name="type"/> <!-- tipo; si es presencial, telfeonico, por whtasapp -->
+                    <field name="date"/> <!-- Fecha-->
+
+                    <!--Campos de agrupaciones predefinidas-->
                     <group expand="0" string="Group By">
-                        <filter name="groupby" string="" domain="[]" context="{'group_by':''}"
-                                help=""/>
+
+                        <!--Aqui haremos una agrupacion por Tipo:-->
+                        <!-- En el domain se le pasaria un array de tuplas. En este caso por ejemplo le diremos que nos filtre solamete las que estan "Realizadas", osea las visitas realizadas. Y quedaria asi: domain="[('done','=', 'True')]" -->
+                        <filter name="groupby_type" string="Tipo" domain="[]" context="{'group_by':'type'}"
+                                help="Agrupar por tipo"/>
+
+                        <!--Aqui podriamos que nos agrupe por la Fecha:-->
+                        <filter name="groupby_date" string="Fecha" context="{'group_by':'date:year'}"
+                                help="Agrupar por Fecha"/>
                     </group>
-                    <filter name="fil_by" string="" domain="[{'','=',''}]"
-                            help=""/>
+
+                    <!--Ahora aqui definimos como se hacen los filtrados:
+                    Para este caso especificaremos el filtro, que me traiga las visitas que estan "realizadas"-->
+                    <filter name="filter_by_done" string="Realizada" domain="[('done','=','True')]"
+                            help="Visitas realizadas"/>
                 </search>
             </field>
         </record>
