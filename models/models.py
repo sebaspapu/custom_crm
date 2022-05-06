@@ -25,7 +25,6 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
 #     @api.depends('value')
 #     def _value_pc(self):
 
-
 #Imagen asociad a vista kamban
      image = fields.Binary(String='Imagen')
 
