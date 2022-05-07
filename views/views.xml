@@ -41,6 +41,18 @@
                     <field name="name"/>
                     <field name="type"/>
                     <field name="date"/>
+                    <!-- Aqui añadiremos los botones que apareceran en la vista arbol, los cuales tendran definidos en su interior las funciones
+                    que me permitiran realizar las consultas a la base de datos-->
+                    <!-- Un boton se define de la siguiente manera:
+                    Eqtiqueta button
+                     Luego el nombre de la funcionan la cual invocaremos cuando demos click sobre el
+                     Atraves de un String le indicamos el nombre que queremos que nos muestre
+                     le especificamos la clase ts para que nos lo pinte de la manera estadar que hace odoo (osea que quede con esa forma morada)
+                     Y le especificamos el tipo, que en este caso será un objecto-->
+                    <button name="f_create" string="Crear" class="oe_highlight" type="object"/>
+                    <!--Boton buscar y editar-->
+                    <button name="f_search_update" string="Buscar/Editar" class="oe_highlight" type="object"/>
+
                 </tree>
             </field>
         </record>
