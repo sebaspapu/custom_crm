@@ -26,7 +26,7 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
 #     @api.depends('value')
 #     def _value_pc(self):
 
-#Imagen asociad a vista kamban
+     #Imagen asociad a vista kamban
      image = fields.Binary(String='Imagen')
 
      """
@@ -92,4 +92,12 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
           #IMPORTANTE: Obvio debemos primero hacer la busqueda de en este caso el name, y luego de hacer esta busqueda, guardar el atributo en la variable visit, para que posteriormente cuando vayamos a realizar la edicion pues podamos llamar al metodo del ORM
           #El metodo write recibe un js tipo, como un diccionario de python.
 
+
+     #ORM ELIMINAR (DELETE)
+
+     def f_delete(self):
+          #Lo primero que hacemos es realizar una busqueda, para eso debemos usar si o si un metodo buscar.
+          #Para este caso utilizare el metodo orm browse
+          visitParaEliminar = self.env['custom_crm.visit'].browse([7])
+          visitParaEliminar.unlink() #Y utilizamos entonces el metodo Unlink para eliminar de la vista y de la base de datos el dato asociado en este caso a ese id encontrado por el metodo browse
 

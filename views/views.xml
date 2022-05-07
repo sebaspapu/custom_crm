@@ -41,6 +41,7 @@
                     <field name="name"/>
                     <field name="type"/>
                     <field name="date"/>
+
                     <!-- Aqui añadiremos los botones que apareceran en la vista arbol, los cuales tendran definidos en su interior las funciones
                     que me permitiran realizar las consultas a la base de datos-->
                     <!-- Un boton se define de la siguiente manera:
@@ -52,6 +53,8 @@
                     <button name="f_create" string="Crear" class="oe_highlight" type="object"/>
                     <!--Boton buscar y editar-->
                     <button name="f_search_update" string="Buscar/Editar" class="oe_highlight" type="object"/>
+                    <!--Boton Eliminar-->
+                    <button name="f_delete" string="Eliminar" class="oe_highlight" type="object"/>
 
                 </tree>
             </field>
