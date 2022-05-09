@@ -1,24 +1,44 @@
 <odoo>
     <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
+
+        <!--Aqui realizamos el segundo paso de la generacion de informes.
+        En este caso vamos a definir la estructura de lo que será la plantilla.
+        Los campos que queremos que nos pinte y como queremos que nos los pinte en el pdf y como queremos que nos los estructura-->
+
+        <template id="report_visit_card"><!--Especifique el id de la plantilla. Y este debe considir el nombre  de la segunda parte del name definido en el archivo xml reports -->
+            <t t-call="web.html_container"><!--Luego le indicamos que los datos los vamos a definir en formato html. Y que luego ese html lo vamos a convertir en pdf-->
+                <t t-foreach="docs" t-as="o"> <!--Luego vamos a iterar sobre todos los documentos que enviemos en este parametro docs que vamos a enviar despues desde
+                el dominio, y lo vamos a llamar a cada uno de ellos como 'o'. Vamos a hacer el caso de que unicamente vamos a mandar un dato de una visita. Entonces vamos
+                a tener una visita y vamos a enviar los datos solamente de esa visita. Por tanto solo iteraria una vez-->
+                    <t t-call="web.external_layout"><!--Luego tenemos el marco de un formato estandar. Para definir de que vamos a generar un informe-->
+                        <div class="page"><!--Y que aqui vamos a meter una pagina-->
+                            <!--Osea que aqui vamos a meter el contenido de la pagina-->
+                            <h2>Visita</h2>
+                            <p>Cliente: <!--Le decimos que nos aparezca la etiqueta cliente. Y asociada a esa etiqueta le vamos a decir que nos
+                            pinte el nombre del cliente -->
+                                <span t-field="o.customer.name"/><!--De este modo pintariamos el nombre del cliente asociado a la visita-->
+                            </p>
+
+                            <p>Descripcion: <!--Le decimos que nos aparezca la etiqueta descripcion. Y asociada a esa etiqueta le vamos a decir que nos
+                            pinte el nombre del cliente -->
+                                <span t-field="o.name"/><!--De este modo pintariamos el nombre del cliente asociado a la visita. En este caso solo dejamos el name ya que es quien contiene la descripcion-->
+                            </p>
+
+                            <p>Fecha: <!--Le decimos que nos aparezca la etiqueta descripcion. Y asociada a esa etiqueta le vamos a decir que nos
+                            pinte el nombre del cliente -->
+                                <span t-field="o.date" t-options='{"format": "dd/MM/yyyy"}'/><!--De este modo pintariamos el nombre del cliente asociado a la visita. En este caso solo dejamos el date.
+                                Y debemos especificarle como queremos que nos muestre o pinte la fecha, ya que este no nos lo formatea como queremos, entonces para esto utilizamos el atributo t-options
+                                Y dentro de este t-option crearemos un archivo js como si fuera un diccionario python, en donde especificaremos el formato de la fecha que queremos utilizar
+                                NOTA: Los meses deben ir en mayusculas, para que nos lo tome como meses y no como minutos-->
+                            </p>
+                        </div>
+                    </t>
+                </t>
             </t>
-          </dl>
         </template>
--->
+
+        <!--De esta manera creamos una plantilla bastante basica que nos sirve para ver como estructuramos la informacion, que informacion pintamos
+        Y que atributos vamos a poder utilizar, y la manera de trabajar en algunos casos con esos atributos-->
+
     </data>
 </odoo>

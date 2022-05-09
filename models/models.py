@@ -101,3 +101,28 @@ class Visit(models.Model): #Aqui vamos a usar el tipo de modelo model, que es el
           visitParaEliminar = self.env['custom_crm.visit'].browse([7])
           visitParaEliminar.unlink() #Y utilizamos entonces el metodo Unlink para eliminar de la vista y de la base de datos el dato asociado en este caso a ese id encontrado por el metodo browse
 
+
+#Aqui vamos a definir el tercer paso para la creacion de informes.
+#Crearemos el modelo que nos permitira hacer uso y lanzar la plantilla creada en templates.xml
+
+class VisitReport(models.AbstractModel): #son las que utilizamos para heredar y utilizar otras clases, extender
+# y utilizar otras funcionalidades que definieramos aqui.
+# Se utiliza principalmente cuando se van a realizar informes. Esta clase no permite que se guarde informacion en la base de datos, que se creen datos o se creen datos
+#Principalmente se utiliza para informar
+#Aqui mas informacion sobre el tema: https://www.youtube.com/watch?v=oq0BW63PY6E
+
+     _name='report.custom_crm.report_visit_card' #La segunda parte del name la definimos con el nombre del name igual a como esta definido en el name del visit.xml.
+                                                  #Lo hacemos con el objetivo de que quede enlazado
+     #A continuacion, una vez la persona le de click sobre el elemento de menu que nos va a generar.
+
+#Vamos querer que se invoque una funcion que es la siguiente:
+     @api.model #Que es esto?, es una anotacion y describe la información de un modelo (generalmente se usa cuando el parámetro de solicitud no se puede describir usando la anotación @ApiImplicitParam)
+     def _get_report_values(self, docids, data=None):
+          report_obj = self.env['ir.actions.report']
+          report = report_obj._get_report_from_name('custom_crm.report_visit_card')
+          return {
+               'doc_ids': docids,
+               'doc_model': self.env['custom_crm.visit'],
+               'docs': self.env['custom_crm.visit'].browse(docids)
+          }
+

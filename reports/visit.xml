@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+        <!--Aqui realizamos el primer paso de la generacion de informes.
+        Lo primero que haremos será definir el reporte.
+        Por medio de una acción, que se definira a partir de una etiqueta report-->
+        <report
+            string="Informe visita"
+            id="custom_crm_visit_report"
+            model="custom_crm.visit"
+            report_type="qweb-pdf"
+            name="custom_crm.report_visit_card"
+            file="custom_crm.report_visit_card"
+            attachment_use="True"
+            /> <!--Esta es la accion que nos va a permitir desplegar el listado-->
+    </data>
+
+    <!--
+    <report
+            string="Informe visita" -Este es el nombre que queremos que nos muestre para cuando seleccionamos el informe
+            id="custom_crm_visit_report" -Definimos el nombre del modelo, para poder poder identificarlo
+            model="custom_crm.visit" -Le pasamos el nombre del modelo
+            report_type="qweb-pdf" -especificamos el tipo de reporte. En este caso le decimos que nos genere un  pdf con el documento que vamos a definir.
+            name="custom_crm.report_visit_card" -Le especificamos el nombre de esta manera, de acuerdo a la documentacion es mejor nombrarlo de esta manera
+            file="custom_crm.report_visit_card" -Le ponemos un nombre al archivo que se va a generar
+            attachment_use="True"
+            />
+    -->
+
+</odoo>

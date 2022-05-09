@@ -27,6 +27,7 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'reports/visit.xml' #Debo especificar que he creado un nuevo archivo xml aqui, para que cuando cargue Odoo pueda hacer uso de él.
     ],
     # only loaded in demonstration mode
     'demo': [
