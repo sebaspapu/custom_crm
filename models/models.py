@@ -126,3 +126,10 @@ class VisitReport(models.AbstractModel): #son las que utilizamos para heredar y 
                'docs': self.env['custom_crm.visit'].browse(docids)
           }
 
+#MODULO VENTAS
+#Ahora definimos una nueva clase que es la que utilizaremos pa modeifica el modulo ventas.
+#Veremos como ampliar campos a un modelo que ya existe.
+class CustomSaleOrder(models.Model):
+     _inherit = 'sale.order' #Le especificamos el modulo al cual le haremos las modificaciones
+
+     zone = fields.Selection([('N','Norte'),('C','Centro'),('S','Sur')], string='Zona comercial') #Luego especificamos el atributo

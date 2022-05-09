@@ -189,6 +189,19 @@
         <menuitem id="menu_custom_crm_visit" name="Visitas" parent="menu_custom_crm_visit_categ" sequence="0" action="action_custom_crm_visit_view"/>
 
 
+<!--Agregando un campo nuevo a el modulo de ventas. Especificamente dentro de Ordenes de venta-->
+        <record id="view_sale_order_form" model="ir.ui.view">
+            <field name="name">view.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/> <!--con el atributo inherit_id le especificamos la vista la cual estamos intentando sobreescibir-->
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after"> <!--Luego con xpath accedemos a la posicion xml de la vista, y le decimos que lo siguiente se agregue despues de esta linea-->
+                    <field name="zone" /> <!--Le pasamos el contenido que deseamos añadir-->
+                </xpath>
+            </field>
+        </record>
+<!--NOTA: DE ESTE MODO PODEMOS MODIFICAR Y EDITAR, AGREGAR CUALQUIER TIPO DE MODIFICACION A CUALQUIER MODULO DE ODOO, SIGUIENDO ESTOS 3 SENCILLOS PASOS-->
+
 
     </data>
 </odoo>
