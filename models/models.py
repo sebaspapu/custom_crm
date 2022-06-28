@@ -3,7 +3,7 @@
 #Lo primero que hago apenas creo un proyecto para un modulo de odoo aqui en pycharm es crear una estructura para mi proyecto o modulo
 #algo asi como una plantilla , en este caso utilizo algo llamado scaffold
 # Aqui esta la documentacion para hacer el proceso: https://www.odoo.com/documentation/15.0/es/developer/misc/other/cmdline.html#reference-cmdline-scaffold
-
+#el comando es: & "C:\Program Files\Odoo 15.0.20220426\python\python.exe" "C:\Program Files\Odoo 15.0.20220426\server\odoo-bin" scaffold custom_crm "C:\Program Files\Odoo 15.0.20220426\server\odoo\addons_customs"
 
 from odoo import models, fields, api
 import datetime
